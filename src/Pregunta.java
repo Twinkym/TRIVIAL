@@ -1,10 +1,17 @@
 import java.util.Objects;
 
-public class Preguntas {
-    private String pregunta;
+public class Pregunta {
 
-    public Preguntas(String pregunta) {
+    private String pregunta;
+    private boolean respuesta;
+
+    public boolean isRespuesta() {
+        return respuesta;
+    }
+
+    public Pregunta(String pregunta, boolean respuesta) {
         this.pregunta = pregunta;
+        this.respuesta = respuesta;
     }
 
     public String getPregunta() {
@@ -16,9 +23,9 @@ public class Preguntas {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Preguntas preguntas = (Preguntas) o;
+        Pregunta pregunta = (Pregunta) o;
 
-        return Objects.equals(pregunta, preguntas.pregunta);
+        return Objects.equals(this.pregunta, pregunta.pregunta);
     }
 
     @Override
@@ -27,6 +34,8 @@ public class Preguntas {
                 "pregunta=' " + pregunta + '\'' + "\n"
                 ;
     }
+
+
 
     //    @Override
 //    public int hashCode() {
