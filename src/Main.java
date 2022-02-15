@@ -8,7 +8,6 @@ public class Main {
         System.out.println("Hola amigos :) esto se convertirá " +
                 "en un Trivial Game en un Juego del Trivial");
 
-
         List<Pregunta> preguntas = buildPreguntasList();
 
         System.out.println("las preguntas son: " + preguntas);
@@ -17,8 +16,6 @@ public class Main {
         System.out.println(contador);
 
     }
-
-
 
     private static List<Pregunta> buildPreguntasList() {
         List<Pregunta> preguntas = new ArrayList<>();

@@ -3,19 +3,35 @@ import java.util.Objects;
 public class Pregunta {
 
     private String pregunta;
-    private boolean respuesta;
+    private boolean respuestaValida;
+    private boolean respuestaUsuario;
+    private int puntuacion;
 
     public boolean isRespuesta() {
-        return respuesta;
+        return respuestaValida;
     }
 
-    public Pregunta(String pregunta, boolean respuesta) {
+    public Pregunta(String pregunta, boolean respuestaValida, boolean respuestaUsuario, int puntuacion) {
         this.pregunta = pregunta;
-        this.respuesta = respuesta;
+        this.respuestaValida = respuestaValida;
+        this.respuestaUsuario = respuestaUsuario;
+        this.puntuacion = puntuacion;
     }
 
     public String getPregunta() {
         return pregunta;
+    }
+
+    public boolean isRespuestaValida() {
+        return respuestaValida;
+    }
+
+    public boolean isRespuestaUsuario() {
+        return respuestaUsuario;
+    }
+
+    public int getPuntuacion() {
+        return puntuacion;
     }
 
     @Override
