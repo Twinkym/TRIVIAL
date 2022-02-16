@@ -6,15 +6,13 @@ public class Pregunta {
     private boolean respuestaValida;
     private boolean respuestaUsuario;
     private int puntuacion;
+    private String tecnologia;
 
-    public boolean isRespuesta() {
-        return respuestaValida;
-    }
 
-    public Pregunta(String pregunta, boolean respuestaValida, boolean respuestaUsuario, int puntuacion) {
+    public Pregunta(String pregunta, boolean respuestaValida, int puntuacion) {
         this.pregunta = pregunta;
         this.respuestaValida = respuestaValida;
-        this.respuestaUsuario = respuestaUsuario;
+        this.respuestaUsuario = false;
         this.puntuacion = puntuacion;
     }
 
@@ -30,8 +28,16 @@ public class Pregunta {
         return respuestaUsuario;
     }
 
+    public void setRespuestaUsuario(boolean respuestaUsuario) {
+        this.respuestaUsuario = respuestaUsuario;
+    }
+
     public int getPuntuacion() {
         return puntuacion;
+    }
+
+    public String getTecnologia() {
+        return tecnologia;
     }
 
     @Override
@@ -51,9 +57,12 @@ public class Pregunta {
                 ;
     }
 
+    @Override
+    public int hashCode() {
+        return tecnologia != null ? tecnologia.hashCode() : 0;
+    }
 
-
-    //    @Override
+//    @Override
 //    public int hashCode() {
 //        return pregunta != null ? pregunta.hashCode() : 0;
 //    }
