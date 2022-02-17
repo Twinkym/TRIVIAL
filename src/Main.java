@@ -1,45 +1,81 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Hola amigos :) esto se convertirá " +
-                "en un Trivial Game en un Juego del Trivial");
+        System.out.println("Bienvenido al Trivial, escoge temática: (1-geografía), (2-historia), (3-matemática)");
+        Scanner sc = new Scanner(System.in);
+        String topics = sc.nextLine();
 
 
-        List<Pregunta> preguntas = buildPreguntasList();
-
-        System.out.println("las preguntas son: " + preguntas);
-        int contadorPuntuacion = showPreguntasyPuntuacion(preguntas);
 
 
+
+
+
+        buildTopicMap();
+
+        int contadorPuntuacion = showPreguntasyPuntuacion(questions);
         System.out.println(contadorPuntuacion);
 
+
+        return ;
+
+
+    }
+
+    private static Map<String, List<Question>> buildTopicMap() {
+
+        Map<String, List<Question>> topicMap = new HashMap<>();
+        LinkedList<Question> geography = new LinkedList<>();
+        List<Question> history = new ArrayList<>();
+        List<Question> math = new ArrayList<>();
+
+
+        geography.add(new Question("La capital de España es Madrid (T/F)", true, 5));
+        geography.add(new Question("La tierra es cuadrada (T/F)", false, 5));
+        geography.add(new Question("España tiene 17 comunidades (T/F)", true, 5));
+
+        history.add(new Question("Colón descubrió América (T/F)", true, 5));
+        history.add(new Question("Franco fue un dictador (T/F)", true, 5));
+        history.add(new Question(" España es una república (T/F)", false, 5));
+
+        math.add(new Question(" Uno más uno es 2 (T/F)", true, 5));
+        math.add(new Question(" Dos más dos es 2 (T/F)", false, 5));
+        math.add(new Question(" Uno más dos es 3 (T/F)", true, 5));
+
+        geography.pollFirst()
+
+
+        topicMap.put("Geografía", geography);
+        topicMap.put("Historia", history);
+        topicMap.put("Matemática", math);
+
+        return topicMap;
     }
 
 
-    private static List<Pregunta> buildPreguntasList() {
-        List<Pregunta> preguntas = new ArrayList<>();
+    private static List<Question> buildPreguntasList() {
+        List<Question> questions = new ArrayList<>();
 
-        preguntas.add(new Pregunta("¿Java es un lenguaje tipado? T/F ", true, 5));
-        preguntas.add(new Pregunta("¿Se pueden hacer aplicaciones móviles con Java? T/F ", true, 5));
-        preguntas.add(new Pregunta(" ¿No se puede crear vídeo juegos con Java? T/F ", false, 5));
-        preguntas.add(new Pregunta(" ¿Java es un lenguaje POO? T/F ", true, 5));
-        preguntas.add(new Pregunta(" ¿El lenguaje Java fue comercializado en 1998? T/F ", false, 5));
+        questions.add(new Question("¿Java es un lenguaje tipado? T/F ", true, 5));
+        questions.add(new Question("¿Se pueden hacer aplicaciones móviles con Java? T/F ", true, 5));
+        questions.add(new Question(" ¿No se puede crear vídeo juegos con Java? T/F ", false, 5));
+        questions.add(new Question(" ¿Java es un lenguaje POO? T/F ", true, 5));
+        questions.add(new Question(" ¿El lenguaje Java fue comercializado en 1998? T/F ", false, 5));
 
-        return preguntas;
+        return questions;
+
     }
 
-    private static int showPreguntasyPuntuacion(List<Pregunta> preguntas) {
+    private static int showPreguntasyPuntuacion(List<Question> preguntas) {
 
         int contadorPuntuacion = 0;
 
         for (int i = 0; i < preguntas.size(); i++) {
-            Pregunta currentPregunta = preguntas.get(i);
+            Question currentPregunta = preguntas.get(i);
 
-            System.out.println(currentPregunta.getPregunta());
+            System.out.println(currentPregunta.getQuestion());
 
             System.out.println("T/F?");
             Scanner sc = new Scanner(System.in);
@@ -47,18 +83,16 @@ public class Main {
 
             boolean respuestaUsuario = option.equalsIgnoreCase("T");
 
-            currentPregunta.setRespuestaUsuario(respuestaUsuario);
+            currentPregunta.setReaderAnswer(respuestaUsuario);
 
-            if (respuestaUsuario == currentPregunta.isRespuestaCorrecta()) {
+            if (respuestaUsuario == currentPregunta.isCorrectAnswer()) {
                 System.out.println("Felicidades! Has acertado");
-            }
-            else {
+            } else {
                 System.out.println("Nice try ;-)");
             }
 
 
-
-            if (respuestaUsuario == currentPregunta.isRespuestaCorrecta()) {
+            if (respuestaUsuario == currentPregunta.isCorrectAnswer()) {
                 System.out.println("respuesta correcta");
                 contadorPuntuacion = contadorPuntuacion++;
 
@@ -74,19 +108,19 @@ public class Main {
         int contadorPreguntasAcertadas = 0;
 
         for (int i = 0; i < preguntas.size(); i++) {
-            Pregunta currentPregunta = preguntas.get(i);
-            if( currentPregunta.isRespuestaUsuario()
-                    == currentPregunta.isRespuestaCorrecta() ) {
-                System.out.println(currentPregunta.getPregunta());
+            Question currentQuestion = preguntas.get(i);
+            if (currentQuestion.isReaderAnswer()
+                    == currentQuestion.isCorrectAnswer()) {
+                System.out.println(currentQuestion.getQuestion());
                 System.out.println("has acertado: ");
-                puntuacionTotal = puntuacionTotal + currentPregunta.getPuntuacion();
+                puntuacionTotal = puntuacionTotal + currentQuestion.getScore();
                 contadorPreguntasAcertadas++;
             }
         }
 
-        System.out.println("has acertado: " + contadorPreguntasAcertadas );
+        System.out.println("has acertado: " + contadorPreguntasAcertadas);
 
-        return puntuacionTotal ;
+        return puntuacionTotal;
 
     }
 
